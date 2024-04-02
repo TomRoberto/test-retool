@@ -16,7 +16,7 @@ router.get("/users", readUsers);
 
 router.get("/user/:id", readUser);
 
-router.put("/user/:id", updateUser);
+router.put("/user/:id", fileUpload(), updateUser);
 
 router.delete("/user/:id", deleteUser);
 

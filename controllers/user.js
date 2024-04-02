@@ -39,8 +39,26 @@ const readUser = (req, res) => {
   }
 };
 
-const updateUser = (req, res) => {
+const updateUser = async (req, res) => {
   try {
+    const userId = req.params.id;
+    const { username, age } = req.body;
+    const avatar = req.files?.avatar;
+    let cloudinaryResponse;
+
+    if (avatar) {
+      cloudinaryResponse = await cloudinary.uploader.upload(
+        convertToBase64(avatar)
+      );
+    }
+
+    await User.findByIdAndUpdate(userId, {
+      username,
+      age,
+      avatar: cloudinaryResponse,
+    });
+
+    res.json({ message: "User updated" });
   } catch (error) {
     errorMessage(res, error);
   }
