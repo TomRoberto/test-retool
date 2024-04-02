@@ -46,8 +46,11 @@ const updateUser = (req, res) => {
   }
 };
 
-const deleteUser = (req, res) => {
+const deleteUser = async (req, res) => {
   try {
+    const userId = req.params.id;
+    await User.findByIdAndDelete(userId);
+    res.json({ message: "User deleted" });
   } catch (error) {
     errorMessage(res, error);
   }
