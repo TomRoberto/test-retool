@@ -48,6 +48,7 @@ const updateUser = (req, res) => {
 
 const deleteUser = async (req, res) => {
   try {
+    console.log("route delete");
     const userId = req.params.id;
     await User.findByIdAndDelete(userId);
     res.json({ message: "User deleted" });
