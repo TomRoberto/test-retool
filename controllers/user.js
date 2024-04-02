@@ -23,9 +23,9 @@ const createUser = async (req, res) => {
   }
 };
 
-const readUsers = (req, res) => {
+const readUsers = async (req, res) => {
   try {
-    const users = User.find();
+    const users = await User.find();
     res.json(users);
   } catch (error) {
     errorMessage(res, error);
